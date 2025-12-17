@@ -6,6 +6,7 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     overflow: hidden;
+}
 
 /* ---- Navigation ---- */
 nav {
@@ -29,30 +30,37 @@ nav button:hover {
     background: #666;
 }
 
-
 /* ---- Screens ---- */
 .screen {
     width: 100vw;
     height: calc(100vh - 60px);
-    display: none;
+    display: none; /* Start hidden */
     justify-content: center;
     align-items: center;
+}
+
+.screen.active {
+    display: flex; /* Show only active screen */
 }
 
 h1 {
     text-align: center;
 }
-
-
 </style>
 
 <script>
-
 function showScreen(n) {
-    document.querySelectorAll('.screen').forEach(div => div.style.display = 'none');
-    document.getElementById('s' + n).style.display = 'flex';
-
+    // Hide all screen elements
+    document.querySelectorAll('.screen').forEach(div => div.classList.remove('active'));
+    
+    // Show the selected screen
+    const selectedScreen = document.getElementById('s' + n);
+    if (selectedScreen) {
+        selectedScreen.classList.add('active');
+    }
+}
 </script>
+
 </head>
 
 <body>
@@ -65,7 +73,7 @@ function showScreen(n) {
     <button onclick="showScreen(5)">5</button>
 </nav>
 
-<div id="s1" class="screen">
+<div id="s1" class="screen active">
     <h1>try1</h1>
 </div>
 
@@ -83,8 +91,6 @@ function showScreen(n) {
 
 <div id="s5" class="screen">
     <h1>try5</h1>
-</div>
-
 </div>
 
 </body>
